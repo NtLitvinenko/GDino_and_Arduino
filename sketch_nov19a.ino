@@ -100,11 +100,13 @@ void gOver() {
   lcd.print("Game over!");
   while (true);
 }
+bool frq = false;
 short cactus_pos=19;
 short fuss = 0;
 bool gamePaused = false;
 
 void loop() {
+  
   static short costume_std = 0;
   static short costume_lay = 0;
 
@@ -113,6 +115,7 @@ void loop() {
   bool isPauseButtonPressed = digitalRead(4);
 
   if (isPauseButtonPressed) {
+    
     delay(300);
     lcd.setCursor(0, 0);
     lcd.print("Pause");
@@ -123,7 +126,14 @@ void loop() {
     delay(200); 
   }
   else {
-
+    if (frq){
+      frq = false;
+      tone(11, 9000);
+      }
+    if (!frq){
+      frq = true;
+      tone(11, 90000);
+      }
     lcd.clear();
     bird_pos--;
     cactus_pos--;
